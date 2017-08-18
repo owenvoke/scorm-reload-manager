@@ -1,0 +1,15 @@
+{
+  "name": "pxgamer/scorm-reload-manager",
+  "description": "A selection of classes for managing the SCORM Reload toolkit.",
+  "type": "library",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "require": {
+    "symfony/console": "^3.3.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "pxgamer\\ScormReload\\": "src/"
+    }
+  }
+}
