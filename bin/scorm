@@ -7,4 +7,5 @@ if (file_exists(__DIR__ . '/../../../autoload.php')) {
 }
 $app = new Symfony\Component\Console\Application('Scorm Reload Manager', '1.0.0');
 $app->add(new \pxgamer\ScormReload\Course\ClearCommand());
+$app->add(new \pxgamer\ScormReload\Course\ValidateCommand());
 $app->run();
