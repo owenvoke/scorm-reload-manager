@@ -8,10 +8,10 @@ Install globally using `composer global require pxgamer/scorm-reload-manager`.
 
 ## Usage
 
-**List commands:**
+**List commands:**  
 `scorm list`
 
-**List commands for a namespace:**
+**List commands for a namespace:**  
 `scorm list {namespace}`
 
 ## Current Functions
