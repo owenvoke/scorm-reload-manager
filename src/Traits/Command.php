@@ -37,7 +37,7 @@ trait Command
         /**
          * The default path that Reload SCORM Player sets
          */
-        'COURSE_PACKAGE_DIR' => 'reload/reload-scorm-player/server/webapps/reload-scorm-player/course-packages'
+        'COURSE_PACKAGE_DIR' => 'server/webapps/reload-scorm-player/course-packages'
     ];
 
     /**
@@ -97,13 +97,13 @@ trait Command
         }
 
         if (stristr(PHP_OS, 'WIN')) {
-            $userDir = 'c:/users/' . $this->sCurrentUser . '/' . $this->config['COURSE_PACKAGE_DIR'];
+            $userDir = 'c:/users/' . $this->sCurrentUser . '/reload/reload-scorm-player/' . $this->config['COURSE_PACKAGE_DIR'];
 
             return $this->verifyDirectory($userDir);
         }
 
         if (stristr(PHP_OS, 'LINUX')) {
-            $userDir = '/home/' . $this->sCurrentUser . '/' . $this->config['COURSE_PACKAGE_DIR'];
+            $userDir = '/home/' . $this->sCurrentUser . '/reload/reload-scorm-player/' . $this->config['COURSE_PACKAGE_DIRa'];
 
             return $this->verifyDirectory($userDir);
         }
