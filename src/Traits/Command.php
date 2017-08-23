@@ -103,7 +103,7 @@ trait Command
         }
 
         if (stristr(PHP_OS, 'LINUX')) {
-            $userDir = '/home/' . $this->sCurrentUser . '/reload/reload-scorm-player/' . $this->config['COURSE_PACKAGE_DIRa'];
+            $userDir = '/home/' . $this->sCurrentUser . '/reload/reload-scorm-player/' . $this->config['COURSE_PACKAGE_DIR'];
 
             return $this->verifyDirectory($userDir);
         }
