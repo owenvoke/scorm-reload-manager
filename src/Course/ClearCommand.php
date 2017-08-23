@@ -178,7 +178,13 @@ class ClearCommand extends Command
         }
 
         if (stristr(PHP_OS, 'LINUX')) {
-            // Linux not supported yet
+            $user_dir = '/home/' . $this->sCurrentUser . '/' . self::COURSE_PACKAGE_DIR;
+
+            if (is_dir($user_dir)) {
+                return ($this->sScormDirectory = $user_dir);
+            }
+
+            throw new \ErrorException(self::ERROR_SCORM_DIRECTORY_NOT_FOUND);
         }
 
         throw new \ErrorException(self::ERROR_UNSUPPORTED_OS);
