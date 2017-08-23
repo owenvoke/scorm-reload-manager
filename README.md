@@ -1,5 +1,7 @@
 # scorm-reload-manager
 
+A selection of classes for managing the SCORM Reload toolkit.
+
 ## Installation
 
 Install globally using `composer global require pxgamer/scorm-reload-manager`.
