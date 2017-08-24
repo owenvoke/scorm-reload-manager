@@ -18,8 +18,6 @@ class ValidateCommand extends Command
 {
     use Traits\Command;
 
-    const VALIDATION_SCHEMA = __DIR__ . '/../../resources/validation/schema.xsd';
-
     /**
      * Configure the command options.
      *
@@ -83,13 +81,12 @@ class ValidateCommand extends Command
     {
         $sManifestName = $sCourseName->getPathname() . '/imsmanifest.xml';
         if (file_exists($sManifestName)) {
+            libxml_use_internal_errors(true);
+
             $oManifest = new \DOMDocument();
             $oManifest->load($sManifestName);
-            try {
-                $bStatus = $oManifest->schemaValidate(self::VALIDATION_SCHEMA);
-            } catch (\DOMException $exception) {
-                $bStatus = 'Invalid imsmanifest.xml';
-            }
+
+            $bStatus = empty(libxml_get_errors()) ? 'true' : 'false';
         } else {
             $bStatus = 'imsmanifest.xml not found.';
         }
