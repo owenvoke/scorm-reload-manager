@@ -5,7 +5,7 @@ if (file_exists(__DIR__ . '/../../../autoload.php')) {
 } else {
     require __DIR__ . '/../vendor/autoload.php';
 }
-$app = new Symfony\Component\Console\Application('Scorm Reload Manager', '1.1.2');
+$app = new Symfony\Component\Console\Application('Scorm Reload Manager', '1.1.3');
 
 // Add Course Commands
 $app->add(new \pxgamer\ScormReload\Course\ClearCommand());
@@ -16,5 +16,14 @@ $app->add(new \pxgamer\ScormReload\Course\ValidateCommand());
 // Add Learner Commands
 $app->add(new \pxgamer\ScormReload\Learner\IdCommand());
 $app->add(new \pxgamer\ScormReload\Learner\NameCommand());
+
+// Add Preferences Commands
+$app->add(new \pxgamer\ScormReload\Prefs\FolderCommand());
+$app->add(new \pxgamer\ScormReload\Prefs\NavigationCommand());
+$app->add(new \pxgamer\ScormReload\Prefs\PortCommand());
+$app->add(new \pxgamer\ScormReload\Prefs\ProgressCommand());
+$app->add(new \pxgamer\ScormReload\Prefs\SupportCommand());
+$app->add(new \pxgamer\ScormReload\Prefs\ThemeCommand());
+$app->add(new \pxgamer\ScormReload\Prefs\TreeCommand());
 
 $app->run();
