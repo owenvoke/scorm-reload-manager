@@ -13,4 +13,7 @@ $app->add(new \pxgamer\ScormReload\Course\ImportCommand());
 $app->add(new \pxgamer\ScormReload\Course\ListCommand());
 $app->add(new \pxgamer\ScormReload\Course\ValidateCommand());
 
+// Add Learner Commands
+$app->add(new \pxgamer\ScormReload\Learner\IdCommand());
+
 $app->run();
