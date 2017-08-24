@@ -2,6 +2,7 @@
 
 namespace pxgamer\ScormReload\Course;
 
+use pxgamer\ScormReload\Traits;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -15,35 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
  */
 class ClearCommand extends Command
 {
-    /**
-     * The default path that Reload SCORM Player sets
-     */
-    const COURSE_PACKAGE_DIR = 'reload/reload-scorm-player/server/webapps/reload-scorm-player/course-packages';
-    /**
-     * Error for when not running as a possible current user
-     */
-    const ERROR_NO_CURRENT_USER = 'No current user selected.';
-    /**
-     * Error for missing SCORM Reload course directory
-     */
-    const ERROR_SCORM_DIRECTORY_NOT_FOUND = 'SCORM Reload directory could not be found.';
-    /**
-     * Error for unsupported OS types
-     */
-    const ERROR_UNSUPPORTED_OS = 'This operating system is not supported.';
-
-    /**
-     * @var string
-     */
-    private $sCurrentUser;
-    /**
-     * @var SymfonyStyle
-     */
-    private $oOutput;
-    /**
-     * @var string
-     */
-    private $sScormDirectory;
+    use Traits\Command;
 
     /**
      * Configure the command options.
@@ -138,49 +111,5 @@ class ClearCommand extends Command
         }
 
         return $aRemoved;
-    }
-
-    /**
-     * Set the current user
-     *
-     * @return string
-     * @throws \ErrorException
-     */
-    private function setUser()
-    {
-        if (!($this->sCurrentUser = get_current_user())) {
-            throw new \ErrorException(self::ERROR_NO_CURRENT_USER);
-        }
-
-        return $this->sCurrentUser;
-    }
-
-    /**
-     * Set the current user's SCORM Reload directory
-     *
-     * @return string
-     * @throws \ErrorException
-     */
-    private function setScormDirectory()
-    {
-        if (stristr(PHP_OS, 'DAR')) {
-            // Mac not supported yet
-        }
-
-        if (stristr(PHP_OS, 'WIN')) {
-            $user_dir = 'c:/users/' . $this->sCurrentUser . '/' . self::COURSE_PACKAGE_DIR;
-
-            if (is_dir($user_dir)) {
-                return ($this->sScormDirectory = $user_dir);
-            }
-
-            throw new \ErrorException(self::ERROR_SCORM_DIRECTORY_NOT_FOUND);
-        }
-
-        if (stristr(PHP_OS, 'LINUX')) {
-            // Linux not supported yet
-        }
-
-        throw new \ErrorException(self::ERROR_UNSUPPORTED_OS);
     }
 }
