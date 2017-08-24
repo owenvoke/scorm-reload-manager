@@ -53,15 +53,14 @@ class ValidateCommand extends Command
     {
         $oCourses = new \DirectoryIterator($this->sScormDirectory);
 
-        foreach ($oCourses as $path) {
-            $sManifestName = $path->getPathname() . '/imsmanifest.xml';
+        $aCourseStatuses = [];
 
+        foreach ($oCourses as $path) {
             if (
                 $path->isDir() &&
-                !$path->isDot() &&
-                file_exists($sManifestName)
+                !$path->isDot()
             ) {
-                $this->validateCourse($sManifestName);
+                $aCourseStatuses[] = $this->validateCourse($path);
             }
         }
 
@@ -70,27 +69,34 @@ class ValidateCommand extends Command
                 'Course Name',
                 'Valid'
             ],
-            [
-
-            ]
+            $aCourseStatuses
         );
     }
 
     /**
      * Validate a single course
      *
-     * @param string $sManifestName
+     * @param \DirectoryIterator $sCourseName
      * @return array
      */
-    private function validateCourse($sManifestName)
+    private function validateCourse($sCourseName)
     {
-        $oManifest = new \DOMDocument();
-        $oManifest->load($sManifestName);
-        $oManifest->schemaValidate(self::VALIDATION_SCHEMA);
+        $sManifestName = $sCourseName->getPathname() . '/imsmanifest.xml';
+        if (file_exists($sManifestName)) {
+            $oManifest = new \DOMDocument();
+            $oManifest->load($sManifestName);
+            try {
+                $bStatus = $oManifest->schemaValidate(self::VALIDATION_SCHEMA);
+            } catch (\DOMException $exception) {
+                $bStatus = 'Invalid imsmanifest.xml';
+            }
+        } else {
+            $bStatus = 'imsmanifest.xml not found.';
+        }
 
         return [
-            'status' => true,
-            'error' => ''
+            $sCourseName->getBasename(),
+            $bStatus
         ];
     }
 }
