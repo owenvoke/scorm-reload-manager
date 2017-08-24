@@ -6,8 +6,11 @@ if (file_exists(__DIR__ . '/../../../autoload.php')) {
     require __DIR__ . '/../vendor/autoload.php';
 }
 $app = new Symfony\Component\Console\Application('Scorm Reload Manager', '1.1.1');
+
+// Add Course Commands
 $app->add(new \pxgamer\ScormReload\Course\ClearCommand());
 $app->add(new \pxgamer\ScormReload\Course\ImportCommand());
 $app->add(new \pxgamer\ScormReload\Course\ListCommand());
 $app->add(new \pxgamer\ScormReload\Course\ValidateCommand());
+
 $app->run();
