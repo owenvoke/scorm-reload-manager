@@ -20,6 +20,9 @@ Install globally using `composer global require pxgamer/scorm-reload-manager`.
 
 **Course**
 
-Function | Usage                  | Description
--------- | ---------------------- | -------------
-Clear    | `scorm course:clear`   | Removes all courses in the current user's SCORM Reload directory.
+Function    | Usage                   | Description
+----------- | ----------------------- | ---------------------
+Clear       | `scorm course:clear`    | Removes all courses in the current user's SCORM Reload directory.
+Import      | `scorm course:import`   | Import a new SCORM package from a ZIP file.
+List        | `scorm course:list`     | List all currently available SCORM packages.
+Validate    | `scorm course:validate` | Validate the XML manifest for each available SCORM package.
