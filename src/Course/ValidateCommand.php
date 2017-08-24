@@ -47,6 +47,9 @@ class ValidateCommand extends Command
         $this->validateAllCourses();
     }
 
+    /**
+     * Validate all available courses
+     */
     private function validateAllCourses()
     {
         $oCourses = new \DirectoryIterator($this->sScormDirectory);
