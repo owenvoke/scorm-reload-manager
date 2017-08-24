@@ -54,9 +54,16 @@ class ThemeCommand extends Command
             'nimbus' => 'javax.swing.plaf.nimbus.NimbusLookAndFeel',
             'metal' => 'javax.swing.plaf.metal.MetalLookAndFeel',
             'motif' => 'com.sun.java.swing.plaf.motif.MotifLookAndFeel',
-            'windows' => 'com.sun.java.swing.plaf.windows.WindowsLookAndFeel',
-            'classic' => 'com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel',
         ];
+
+        if (stristr(PHP_OS, 'WIN')) {
+            $aThemesAvailable['windows'] = 'com.sun.java.swing.plaf.windows.WindowsLookAndFeel';
+            $aThemesAvailable['classic'] = 'com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel';
+        }
+
+        if (stristr(PHP_OS, 'LINUX')) {
+            $aThemesAvailable['gtk'] = 'com.sun.java.swing.plaf.gtk.GTKLookAndFeel';
+        }
 
         if ($sThemeName) {
             $sThemeName = strtolower($sThemeName);
