@@ -17,4 +17,7 @@ $app->add(new \pxgamer\ScormReload\Course\ValidateCommand());
 $app->add(new \pxgamer\ScormReload\Learner\IdCommand());
 $app->add(new \pxgamer\ScormReload\Learner\NameCommand());
 
+// Add Preferences Commands
+$app->add(new \pxgamer\ScormReload\Prefs\TreeCommand());
+
 $app->run();
