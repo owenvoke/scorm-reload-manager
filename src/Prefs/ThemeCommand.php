@@ -59,6 +59,8 @@ class ThemeCommand extends Command
         ];
 
         if ($sThemeName) {
+            $sThemeName = strtolower($sThemeName);
+
             if (key_exists($sThemeName, $aThemesAvailable)) {
                 $this->setPreferenceValue('look_and_feel', $aThemesAvailable[$sThemeName], 'Theme');
             } else {
