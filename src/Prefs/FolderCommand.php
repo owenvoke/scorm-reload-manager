@@ -51,7 +51,7 @@ class FolderCommand extends Command
         $sDirectory = $input->getArgument('directory');
 
         if (is_dir($sDirectory)) {
-            $this->setPreferenceValue('show_tree', $sDirectory, 'Default Directory');
+            $this->setPreferenceValue('default_folder', $sDirectory, 'Default Directory');
         } else {
             throw new \ErrorException('Invalid directory: ' . $sDirectory);
         }
