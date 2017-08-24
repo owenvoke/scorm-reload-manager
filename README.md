@@ -32,3 +32,4 @@ Validate    | `scorm course:validate` | Validate the XML manifest for each avail
 Function    | Usage                   | Description
 ----------- | ----------------------- | ---------------------
 ID          | `scorm learner:id`      | Update the default learner's student id for Reload.
+Name        | `scorm learner:name`    | Update the default learner's name for Reload.
