@@ -35,9 +35,13 @@ trait Command
      */
     protected $config = [
         /**
+         * The root path that Reload SCORM Player is set up to use
+         */
+        'SCORM_PLAYER_ROOT_DIR' => '',
+        /**
          * The default path that Reload SCORM Player sets
          */
-        'COURSE_PACKAGE_DIR' => 'server/webapps/reload-scorm-player/course-packages'
+        'COURSE_PACKAGE_DIR' => '/server/webapps/reload-scorm-player/course-packages',
     ];
 
     /**
@@ -87,23 +91,24 @@ trait Command
     /**
      * Set the current user's SCORM Reload directory
      *
+     * @param string $sDirectoryConfig
      * @return string
      * @throws \ErrorException
      */
-    protected function setScormDirectory()
+    protected function setScormDirectory($sDirectoryConfig = 'COURSE_PACKAGE_DIR')
     {
         if (stristr(PHP_OS, 'DAR')) {
             // Mac not supported yet
         }
 
         if (stristr(PHP_OS, 'WIN')) {
-            $userDir = 'c:/users/' . $this->sCurrentUser . '/reload/reload-scorm-player/' . $this->config['COURSE_PACKAGE_DIR'];
+            $userDir = 'c:/users/' . $this->sCurrentUser . '/reload/reload-scorm-player' . $this->config[$sDirectoryConfig];
 
             return $this->verifyDirectory($userDir);
         }
 
         if (stristr(PHP_OS, 'LINUX')) {
-            $userDir = '/home/' . $this->sCurrentUser . '/reload/reload-scorm-player/' . $this->config['COURSE_PACKAGE_DIR'];
+            $userDir = '/home/' . $this->sCurrentUser . '/reload/reload-scorm-player' . $this->config[$sDirectoryConfig];
 
             return $this->verifyDirectory($userDir);
         }
