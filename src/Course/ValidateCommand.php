@@ -4,6 +4,7 @@ namespace pxgamer\ScormReload\Course;
 
 use pxgamer\ScormReload\Traits;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -27,7 +28,9 @@ class ValidateCommand extends Command
     {
         $this
             ->setName('course:validate')
-            ->setDescription('Validate the XML manifest for each course.');
+            ->setDescription('Validate the XML manifest for each course.')
+            ->addArgument('courses', InputArgument::IS_ARRAY | InputArgument::OPTIONAL,
+                'A list of courses to validate.', null);
     }
 
     /**
@@ -44,7 +47,23 @@ class ValidateCommand extends Command
         $this->setUser();
         $this->setScormDirectory();
 
-        $this->validateAllCourses();
+        $aProvidedCourses = $input->getArgument('courses');
+
+        if ($aProvidedCourses) {
+            $oCourses = new \DirectoryIterator($this->sScormDirectory);
+
+            $aCourseStatuses = [];
+
+            foreach ($oCourses as $path) {
+                if ($path->isDir() && !$path->isDot() && in_array($path->getBasename(), $aProvidedCourses)) {
+                    $aCourseStatuses[] = $this->validateCourse($path);
+                }
+            }
+
+            $this->outputCourseTable($aCourseStatuses);
+        } else {
+            $this->validateAllCourses();
+        }
     }
 
     /**
@@ -57,14 +76,21 @@ class ValidateCommand extends Command
         $aCourseStatuses = [];
 
         foreach ($oCourses as $path) {
-            if (
-                $path->isDir() &&
-                !$path->isDot()
-            ) {
+            if ($path->isDir() && !$path->isDot()) {
                 $aCourseStatuses[] = $this->validateCourse($path);
             }
         }
 
+        $this->outputCourseTable($aCourseStatuses);
+    }
+
+    /**
+     * Display the results in a table
+     *
+     * @param array $aCourseStatuses
+     */
+    private function outputCourseTable($aCourseStatuses)
+    {
         $this->oOutput->table(
             [
                 'Course Name',
