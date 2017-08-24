@@ -18,7 +18,8 @@ $app->add(new \pxgamer\ScormReload\Learner\IdCommand());
 $app->add(new \pxgamer\ScormReload\Learner\NameCommand());
 
 // Add Preferences Commands
-$app->add(new \pxgamer\ScormReload\Prefs\TreeCommand());
+$app->add(new \pxgamer\ScormReload\Prefs\FolderCommand());
 $app->add(new \pxgamer\ScormReload\Prefs\NavigationCommand());
+$app->add(new \pxgamer\ScormReload\Prefs\TreeCommand());
 
 $app->run();
