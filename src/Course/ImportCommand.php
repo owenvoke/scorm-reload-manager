@@ -63,7 +63,7 @@ class ImportCommand extends Command
      * @param string $sProvidedCoursePath
      * @throws \ErrorException
      */
-    public function importCourse($sProvidedCoursePath)
+    private function importCourse($sProvidedCoursePath)
     {
         $oCourseZip = new \ZipArchive();
 
