@@ -30,7 +30,7 @@ class ThemeCommand extends Command
         $this
             ->setName('prefs:theme')
             ->setDescription('Set the Reload SCORM Player theme.')
-            ->addArgument('theme', InputArgument::REQUIRED, 'Theme name.');
+            ->addArgument('theme', InputArgument::OPTIONAL, 'Theme name.');
     }
 
     /**
@@ -51,20 +51,22 @@ class ThemeCommand extends Command
         $sThemeName = $input->getArgument('theme');
 
         $aThemesAvailable = [
-            'Nimbus' => 'javax.swing.plaf.nimbus.NimbusLookAndFeel',
-            'Metal' => 'javax.swing.plaf.metal.MetalLookAndFeel',
-            'Motif' => 'com.sun.java.swing.plaf.motif.MotifLookAndFeel',
-            'Windows' => 'com.sun.java.swing.plaf.windows.WindowsLookAndFeel',
-            'Classic' => 'com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel',
+            'nimbus' => 'javax.swing.plaf.nimbus.NimbusLookAndFeel',
+            'metal' => 'javax.swing.plaf.metal.MetalLookAndFeel',
+            'motif' => 'com.sun.java.swing.plaf.motif.MotifLookAndFeel',
+            'windows' => 'com.sun.java.swing.plaf.windows.WindowsLookAndFeel',
+            'classic' => 'com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel',
         ];
 
-        if (key_exists($sThemeName, $aThemesAvailable)) {
-            $this->setPreferenceValue('look_and_feel', $aThemesAvailable[$sThemeName], 'Theme');
+        if ($sThemeName) {
+            if (key_exists($sThemeName, $aThemesAvailable)) {
+                $this->setPreferenceValue('look_and_feel', $aThemesAvailable[$sThemeName], 'Theme');
+            } else {
+                throw new \ErrorException('Invalid theme: ' . $sThemeName);
+            }
         } else {
             $this->oOutput->text('Available themes:');
             $this->oOutput->listing(array_keys($aThemesAvailable));
-
-            throw new \ErrorException('Invalid theme: ' . $sThemeName);
         }
     }
 }
