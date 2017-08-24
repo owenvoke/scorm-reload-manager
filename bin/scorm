@@ -21,6 +21,7 @@ $app->add(new \pxgamer\ScormReload\Learner\NameCommand());
 $app->add(new \pxgamer\ScormReload\Prefs\FolderCommand());
 $app->add(new \pxgamer\ScormReload\Prefs\NavigationCommand());
 $app->add(new \pxgamer\ScormReload\Prefs\PortCommand());
+$app->add(new \pxgamer\ScormReload\Prefs\SupportCommand());
 $app->add(new \pxgamer\ScormReload\Prefs\TreeCommand());
 
 $app->run();
