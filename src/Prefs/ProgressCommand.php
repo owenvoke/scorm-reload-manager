@@ -29,7 +29,7 @@ class ProgressCommand extends Command
     {
         $this
             ->setName('prefs:progress')
-            ->setDescription('Enable or disable checking the auto-progression of items.')
+            ->setDescription('Enable or disable the auto-progression of items.')
             ->addArgument('status', InputArgument::REQUIRED, 'A boolean variable.');
     }
 
