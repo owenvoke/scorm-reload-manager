@@ -26,3 +26,9 @@ Clear       | `scorm course:clear`    | Removes all courses in the current user'
 Import      | `scorm course:import`   | Import a new SCORM package from a ZIP file.
 List        | `scorm course:list`     | List all currently available SCORM packages.
 Validate    | `scorm course:validate` | Validate the XML manifest for each available SCORM package.
+
+**Learner**
+
+Function    | Usage                   | Description
+----------- | ----------------------- | ---------------------
+ID          | `scorm learner:id`      | Update the default learner's student id for Reload.
