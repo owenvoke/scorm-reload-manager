@@ -11,6 +11,7 @@ $app = new Symfony\Component\Console\Application('Scorm Reload Manager', '1.1.4'
 $app->add(new \pxgamer\ScormReload\Course\ClearCommand());
 $app->add(new \pxgamer\ScormReload\Course\ImportCommand());
 $app->add(new \pxgamer\ScormReload\Course\ListCommand());
+$app->add(new \pxgamer\ScormReload\Course\RenameCommand());
 $app->add(new \pxgamer\ScormReload\Course\ValidateCommand());
 
 // Add Learner Commands
