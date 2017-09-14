@@ -29,8 +29,8 @@ class ImportCommand extends Command
         $this
             ->setName('course:import')
             ->setDescription('Import a new SCORM package.')
-            ->addArgument('course', InputArgument::REQUIRED,
-                'Path to the course package.', null);
+            ->addArgument('course', InputArgument::REQUIRED | InputArgument::IS_ARRAY,
+                'Path to the course package.');
     }
 
     /**
@@ -50,10 +50,12 @@ class ImportCommand extends Command
 
         $sProvidedCoursePath = $input->getArgument('course');
 
-        if (file_exists($sProvidedCoursePath)) {
-            $this->importCourse($sProvidedCoursePath);
-        } else {
-            throw new \ErrorException('Invalid course path: ' . $sProvidedCoursePath);
+        foreach ($sProvidedCoursePath as $sCoursePath) {
+            if (file_exists($sCoursePath)) {
+                $this->importCourse($sCoursePath);
+            } else {
+                throw new \ErrorException('Invalid course path: ' . $sCoursePath);
+            }
         }
     }
 
