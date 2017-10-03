@@ -6,7 +6,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Trait Command
- * @package pxgamer\ScormReload\Traits
  */
 trait Command
 {
@@ -17,7 +16,7 @@ trait Command
         /**
          * Error for when not running as a possible current user
          */
-        'NO_CURRENT_USER' => 'No current user selected.',
+        'NO_CURRENT_USER'           => 'No current user selected.',
 
         /**
          * Error for missing SCORM Reload course directory
@@ -27,7 +26,7 @@ trait Command
         /**
          * Error for unsupported OS types
          */
-        'UNSUPPORTED_OS' => 'This operating system is not supported.',
+        'UNSUPPORTED_OS'            => 'This operating system is not supported.',
     ];
 
     /**
@@ -41,7 +40,7 @@ trait Command
         /**
          * The default path that Reload SCORM Player sets
          */
-        'COURSE_PACKAGE_DIR' => '/server/webapps/reload-scorm-player/course-packages',
+        'COURSE_PACKAGE_DIR'    => '/server/webapps/reload-scorm-player/course-packages',
     ];
 
     /**

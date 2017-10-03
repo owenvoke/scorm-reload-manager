@@ -6,7 +6,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Trait Preference
- * @package pxgamer\ScormReload\Traits
  */
 trait Preference
 {
@@ -34,9 +33,11 @@ trait Preference
 
             if ($oPreferencesDocument->saveXML($sPreferencesFilePath)) {
                 $this->oOutput->success('Successfully set ' . $sVanityName . ' to: ' . $mValue);
+
                 return true;
             } else {
                 $this->oOutput->error('Failed to set ' . $sVanityName . '.');
+
                 return false;
             }
         }
