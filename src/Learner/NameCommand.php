@@ -11,7 +11,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Class NameCommand
- * @package pxgamer\ScormReload\Learner
  *
  * @link http://www.reload.ac.uk/scormplayer.html - Reload SCORM Player homepage
  */
@@ -36,7 +35,7 @@ class NameCommand extends Command
     /**
      * Execute the command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface $input
+     * @param  \Symfony\Component\Console\Input\InputInterface   $input
      * @param  \Symfony\Component\Console\Output\OutputInterface $output
      * @return void
      */
@@ -66,9 +65,11 @@ class NameCommand extends Command
 
             if ($oPreferencesDocument->saveXML($sPreferencesFilePath)) {
                 $this->oOutput->success('Successfully set the student name to: ' . $sNameConcatenated);
+
                 return true;
             } else {
                 $this->oOutput->error('Failed to set the student name.');
+
                 return false;
             }
         }
