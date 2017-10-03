@@ -6,6 +6,7 @@ use pxgamer\ScormReload\Traits;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -29,6 +30,7 @@ class ImportCommand extends Command
         $this
             ->setName('course:import')
             ->setDescription('Import a new SCORM package.')
+            ->addOption('name', null, InputOption::VALUE_REQUIRED, 'An optional name for the course.')
             ->addArgument('course', InputArgument::REQUIRED | InputArgument::IS_ARRAY,
                 'Path to the course package.');
     }
@@ -52,7 +54,7 @@ class ImportCommand extends Command
 
         foreach ($sProvidedCoursePath as $sCoursePath) {
             if (file_exists($sCoursePath)) {
-                $this->importCourse($sCoursePath);
+                $this->importCourse($sCoursePath, $input->getOption('name'));
             } else {
                 throw new \ErrorException('Invalid course path: ' . $sCoursePath);
             }
@@ -62,25 +64,26 @@ class ImportCommand extends Command
     /**
      * Import a single course
      *
-     * @param string $sProvidedCoursePath
+     * @param string      $sProvidedCoursePath
+     * @param null|string $courseName
      * @throws \ErrorException
      */
-    private function importCourse($sProvidedCoursePath)
+    private function importCourse($sProvidedCoursePath, $courseName = null)
     {
         $oCourseZip = new \ZipArchive();
 
         if ($oCourseZip->open($sProvidedCoursePath) === true) {
             $oCourseZipSpl = new \SplFileInfo($oCourseZip->filename);
             $sCourseOutputName = basename($oCourseZipSpl->getBasename('.zip'));
-            $sZipExtractDirectory = $this->sScormDirectory . '/' . $sCourseOutputName . '/';
+            $sZipExtractDirectory = $this->sScormDirectory . '/' . ($courseName ?? $sCourseOutputName) . '/';
             if (!is_dir($sZipExtractDirectory)) {
                 if ($oCourseZip->extractTo($sZipExtractDirectory)) {
-                    $this->oOutput->success('Successfully imported course: ' . $sCourseOutputName);
+                    $this->oOutput->success('Successfully imported course: ' . ($courseName ?? $sCourseOutputName));
                 } else {
-                    throw new \ErrorException('Error unzipping archive: ' . $sCourseOutputName);
+                    throw new \ErrorException('Error unzipping archive: ' . ($courseName ?? $sCourseOutputName));
                 }
             } else {
-                throw new \ErrorException('Course path already exists: ' . $sCourseOutputName);
+                throw new \ErrorException('Course path already exists: ' . ($courseName ?? $sCourseOutputName));
             }
         }
     }
