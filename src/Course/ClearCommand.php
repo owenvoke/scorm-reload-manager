@@ -10,7 +10,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Class ClearCommand
- * @package pxgamer\ScormReload\Course
  *
  * @link http://www.reload.ac.uk/scormplayer.html - Reload SCORM Player homepage
  */
@@ -103,11 +102,13 @@ class ClearCommand extends Command
 
         $aRemoved = [
             'directories' => 0,
-            'files' => 0,
+            'files'       => 0,
         ];
 
         foreach ($oCourseDirectories as $path) {
-            $path->isDir() && !$path->isLink() ? rmdir($path->getPathname()) && $aRemoved['directories']++ : unlink($path->getPathname()) && $aRemoved['files']++;
+            $path->isDir() && !$path->isLink() ? rmdir($path->getPathname())
+                                                 && $aRemoved['directories']++ : unlink($path->getPathname())
+                                                                                 && $aRemoved['files']++;
         }
 
         return $aRemoved;
