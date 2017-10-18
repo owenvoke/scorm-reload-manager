@@ -18,6 +18,15 @@ trait Preference
      */
     protected $sScormDirectory;
 
+    /**
+     * Set the value of a preference
+     *
+     * @param string      $sKey
+     * @param string      $mValue
+     * @param string|null $sVanityName
+     * @return bool
+     * @throws \ErrorException
+     */
     private function setPreferenceValue($sKey, $mValue, $sVanityName = null)
     {
         $sPreferencesFilePath = $this->sScormDirectory . '/reload_prefs.xml';
