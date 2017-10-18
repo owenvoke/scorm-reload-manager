@@ -16,6 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class ClearCommand extends Command
 {
     use Traits\Command;
+    use Traits\RecursivelyDeletes;
 
     /**
      * Configure the command options.
@@ -32,9 +33,10 @@ class ClearCommand extends Command
     /**
      * Execute the command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface $input
+     * @param  \Symfony\Component\Console\Input\InputInterface   $input
      * @param  \Symfony\Component\Console\Output\OutputInterface $output
      * @return void
+     * @throws \ErrorException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -92,24 +94,7 @@ class ClearCommand extends Command
      */
     private function countRemoved()
     {
-        $oCourseDirectories = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator(
-                $this->sScormDirectory,
-                \FilesystemIterator::SKIP_DOTS
-            ),
-            \RecursiveIteratorIterator::CHILD_FIRST
-        );
-
-        $aRemoved = [
-            'directories' => 0,
-            'files'       => 0,
-        ];
-
-        foreach ($oCourseDirectories as $path) {
-            $path->isDir() && !$path->isLink() ? rmdir($path->getPathname())
-                                                 && $aRemoved['directories']++ : unlink($path->getPathname())
-                                                                                 && $aRemoved['files']++;
-        }
+        $aRemoved = $this->recursiveDelete($this->sScormDirectory);
 
         return $aRemoved;
     }
