@@ -11,9 +11,10 @@ trait RecursivelyDeletes
      * Recursively delete files and folders from a directory
      *
      * @param string $sDirectory
+     * @param array  $ignoredData
      * @return array|bool
      */
-    protected function recursiveDelete(string $sDirectory)
+    protected function recursiveDelete(string $sDirectory, array $ignoredData = [])
     {
         if (!is_dir($sDirectory)) {
             return false;
@@ -32,7 +33,12 @@ trait RecursivelyDeletes
             'files'       => 0,
         ];
 
+        /** @var \RecursiveDirectoryIterator $path */
         foreach ($oCourseDirectories as $path) {
+            if (in_array($path->getBasename(), $ignoredData)) {
+                continue;
+            }
+
             if ($path->isDir() && !$path->isLink()) {
                 rmdir($path->getPathname());
                 $aRemoved['directories']++;
