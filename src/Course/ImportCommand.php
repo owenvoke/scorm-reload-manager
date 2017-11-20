@@ -30,8 +30,11 @@ class ImportCommand extends Command
             ->setName('course:import')
             ->setDescription('Import a new SCORM package.')
             ->addOption('name', null, InputOption::VALUE_REQUIRED, 'An optional name for the course.')
-            ->addArgument('course', InputArgument::REQUIRED | InputArgument::IS_ARRAY,
-                'Path to the course package.');
+            ->addArgument(
+                'course',
+                InputArgument::REQUIRED | InputArgument::IS_ARRAY,
+                'Path to the course package.'
+            );
     }
 
     /**

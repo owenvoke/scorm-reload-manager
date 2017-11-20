@@ -28,10 +28,18 @@ class RenameCommand extends Command
         $this
             ->setName('course:rename')
             ->setDescription('Rename an available SCORM package.')
-            ->addArgument('current_name', InputArgument::REQUIRED,
-                'The name of the course to rename.', null)
-            ->addArgument('new_name', InputArgument::REQUIRED,
-                'A new name for the course.', null);
+            ->addArgument(
+                'current_name',
+                InputArgument::REQUIRED,
+                'The name of the course to rename.',
+                null
+            )
+            ->addArgument(
+                'new_name',
+                InputArgument::REQUIRED,
+                'A new name for the course.',
+                null
+            );
     }
 
     /**

@@ -28,8 +28,12 @@ class ValidateCommand extends Command
         $this
             ->setName('course:validate')
             ->setDescription('Validate the XML manifest for each course.')
-            ->addArgument('courses', InputArgument::IS_ARRAY | InputArgument::OPTIONAL,
-                'A list of courses to validate.', null);
+            ->addArgument(
+                'courses',
+                InputArgument::IS_ARRAY | InputArgument::OPTIONAL,
+                'A list of courses to validate.',
+                null
+            );
     }
 
     /**
