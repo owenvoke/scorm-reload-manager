@@ -31,10 +31,16 @@ $ composer global require pxgamer/scorm-reload-manager
 Find out more about the Reload SCORM Player from their website at [Reload SCORM Player](http://www.reload.ac.uk/scormplayer.html).
 
 **List commands:**  
-`scorm list`
 
-**List commands for a namespace:**  
-`scorm list {namespace}`
+```bash
+scorm list
+```
+
+**List commands for a namespace:**
+
+```bash
+scorm list {namespace}
+```
 
 **Course**
 
