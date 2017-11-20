@@ -12,7 +12,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Class ImportCommand
- * @package pxgamer\ScormReload\Course
  *
  * @link http://www.reload.ac.uk/scormplayer.html - Reload SCORM Player homepage
  */
@@ -31,14 +30,17 @@ class ImportCommand extends Command
             ->setName('course:import')
             ->setDescription('Import a new SCORM package.')
             ->addOption('name', null, InputOption::VALUE_REQUIRED, 'An optional name for the course.')
-            ->addArgument('course', InputArgument::REQUIRED | InputArgument::IS_ARRAY,
-                'Path to the course package.');
+            ->addArgument(
+                'course',
+                InputArgument::REQUIRED | InputArgument::IS_ARRAY,
+                'Path to the course package.'
+            );
     }
 
     /**
      * Execute the command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface $input
+     * @param  \Symfony\Component\Console\Input\InputInterface   $input
      * @param  \Symfony\Component\Console\Output\OutputInterface $output
      * @return void
      * @throws \ErrorException

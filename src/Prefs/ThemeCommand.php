@@ -11,7 +11,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Class ThemeCommand
- * @package pxgamer\ScormReload\Prefs
  *
  * @link http://www.reload.ac.uk/scormplayer.html - Reload SCORM Player homepage
  */
@@ -36,7 +35,7 @@ class ThemeCommand extends Command
     /**
      * Execute the command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface $input
+     * @param  \Symfony\Component\Console\Input\InputInterface   $input
      * @param  \Symfony\Component\Console\Output\OutputInterface $output
      * @return void
      * @throws \ErrorException
@@ -52,8 +51,8 @@ class ThemeCommand extends Command
 
         $aThemesAvailable = [
             'nimbus' => 'javax.swing.plaf.nimbus.NimbusLookAndFeel',
-            'metal' => 'javax.swing.plaf.metal.MetalLookAndFeel',
-            'motif' => 'com.sun.java.swing.plaf.motif.MotifLookAndFeel',
+            'metal'  => 'javax.swing.plaf.metal.MetalLookAndFeel',
+            'motif'  => 'com.sun.java.swing.plaf.motif.MotifLookAndFeel',
         ];
 
         if (stristr(PHP_OS, 'WIN')) {

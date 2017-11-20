@@ -11,7 +11,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Class NavigationCommand
- * @package pxgamer\ScormReload\Prefs
  *
  * @link http://www.reload.ac.uk/scormplayer.html - Reload SCORM Player homepage
  */
@@ -36,9 +35,10 @@ class NavigationCommand extends Command
     /**
      * Execute the command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface $input
+     * @param  \Symfony\Component\Console\Input\InputInterface   $input
      * @param  \Symfony\Component\Console\Output\OutputInterface $output
      * @return void
+     * @throws \ErrorException
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

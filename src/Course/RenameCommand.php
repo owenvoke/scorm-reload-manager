@@ -11,7 +11,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Class RenameCommand
- * @package pxgamer\ScormReload\Course
  *
  * @link http://www.reload.ac.uk/scormplayer.html - Reload SCORM Player homepage
  */
@@ -29,16 +28,24 @@ class RenameCommand extends Command
         $this
             ->setName('course:rename')
             ->setDescription('Rename an available SCORM package.')
-            ->addArgument('current_name', InputArgument::REQUIRED,
-                'The name of the course to rename.', null)
-            ->addArgument('new_name', InputArgument::REQUIRED,
-                'A new name for the course.', null);
+            ->addArgument(
+                'current_name',
+                InputArgument::REQUIRED,
+                'The name of the course to rename.',
+                null
+            )
+            ->addArgument(
+                'new_name',
+                InputArgument::REQUIRED,
+                'A new name for the course.',
+                null
+            );
     }
 
     /**
      * Execute the command.
      *
-     * @param  \Symfony\Component\Console\Input\InputInterface $input
+     * @param  \Symfony\Component\Console\Input\InputInterface   $input
      * @param  \Symfony\Component\Console\Output\OutputInterface $output
      * @return void
      * @throws \ErrorException
@@ -75,7 +82,11 @@ class RenameCommand extends Command
         $sNewCourseDirectory = $this->sScormDirectory . '/' . $sNewCourseName;
         if (!is_dir($sNewCourseDirectory)) {
             if (rename($sCourseDirectory, $sNewCourseDirectory)) {
-                $this->oOutput->success('Successfully renamed course \'' . $sCurrentCourseName . '\' to \'' . $sNewCourseName . '\'.');
+                $this->oOutput->success('Successfully renamed course \''
+                                        . $sCurrentCourseName
+                                        . '\' to \''
+                                        . $sNewCourseName
+                                        . '\'.');
             } else {
                 throw new \ErrorException('Failed to rename course.');
             }

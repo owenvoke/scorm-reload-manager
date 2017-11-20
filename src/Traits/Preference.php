@@ -6,7 +6,6 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
  * Trait Preference
- * @package pxgamer\ScormReload\Traits
  */
 trait Preference
 {
@@ -19,6 +18,15 @@ trait Preference
      */
     protected $sScormDirectory;
 
+    /**
+     * Set the value of a preference
+     *
+     * @param string      $sKey
+     * @param string      $mValue
+     * @param string|null $sVanityName
+     * @return bool
+     * @throws \ErrorException
+     */
     private function setPreferenceValue($sKey, $mValue, $sVanityName = null)
     {
         $sPreferencesFilePath = $this->sScormDirectory . '/reload_prefs.xml';
@@ -34,9 +42,11 @@ trait Preference
 
             if ($oPreferencesDocument->saveXML($sPreferencesFilePath)) {
                 $this->oOutput->success('Successfully set ' . $sVanityName . ' to: ' . $mValue);
+
                 return true;
             } else {
                 $this->oOutput->error('Failed to set ' . $sVanityName . '.');
+
                 return false;
             }
         }
