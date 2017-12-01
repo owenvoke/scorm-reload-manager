@@ -4,19 +4,7 @@ All notable changes to `scorm-reload-manager` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## NEXT - YYYY-MM-DD
-
-### Added
-- Nothing
-
-### Deprecated
-- Nothing
+## v1.2.2 - 2017-12-01
 
 ### Fixed
-- Nothing
-
-### Removed
-- Nothing
-
-### Security
-- Nothing
+- Added `bin` key back into the Composer JSON
