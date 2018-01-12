@@ -4,6 +4,11 @@ All notable changes to `scorm-reload-manager` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## v1.2.3 - 2017-12-06
+
+### Fixed
+- Corrected legal name in license
+
 ## v1.2.2 - 2017-12-01
 
 ### Fixed
